@@ -24,11 +24,11 @@ namespace JointSolver.core
 			public readonly float Sine;
 			public readonly TMemberId Member;
 
-			public EquationPart(TMemberId member, float angle)
+			public EquationPart(TMemberId member, float cosine, float sine)
 			{
 				Member = member;
-				Cosine = Mathf.Cos(angle);
-				Sine = Mathf.Sign(angle);
+				Cosine = cosine;
+				Sine = sine;
 			}
 
 			public Vector2 GetValueGiven(float stress)

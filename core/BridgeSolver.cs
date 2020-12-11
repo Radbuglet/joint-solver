@@ -56,7 +56,8 @@ namespace JointSolver.core
 				// Setup unsolved terms
 				var terms = (from member in pair.Value
 					let otherJoint = member.JointA == pair.Key ? member.JointB : member.JointA
-					select new AlgebraSolver<BridgeMember>.EquationPart(member, pair.Key.AngleToJoint(otherJoint))).ToList();
+					let delta = pair.Key.DirectionToJoint(otherJoint)
+					select new AlgebraSolver<BridgeMember>.EquationPart(member, delta.x, delta.y)).ToList();
 
 				_solver.AddEquation(new AlgebraSolver<BridgeMember>.Equation(constTerm, terms));
 			}

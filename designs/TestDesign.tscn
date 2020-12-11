@@ -20,22 +20,19 @@ script = ExtResource( 2 )
 JointAPath = NodePath("../Joint3")
 JointBPath = NodePath("../Joint2")
 
-[node name="Member3" type="Node2D" parent="."]
-script = ExtResource( 2 )
-JointAPath = NodePath("../Joint1")
-JointBPath = NodePath("../Joint3")
-
 [node name="Joint1" type="Node2D" parent="."]
-position = Vector2( 448, 192 )
-script = ExtResource( 1 )
-
-[node name="Joint3" type="Node2D" parent="."]
-position = Vector2( 560, 200 )
+position = Vector2( 576, 192 )
 script = ExtResource( 1 )
 LockX = true
 LockY = true
 
 [node name="Joint2" type="Node2D" parent="."]
-position = Vector2( 464, 264 )
+position = Vector2( 512, 320 )
 script = ExtResource( 1 )
-AppliedForce = Vector2( 0, 4.043 )
+AppliedForce = Vector2( 0, 6 )
+
+[node name="Joint3" type="Node2D" parent="."]
+position = Vector2( 448, 192 )
+script = ExtResource( 1 )
+LockX = true
+LockY = true

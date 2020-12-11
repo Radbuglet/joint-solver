@@ -2,4 +2,10 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="designs\TestDesign.tscn" />
+    <Content Include="LICENSE" />
+    <Content Include="README.md" />
+  </ItemGroup>
 </Project>

@@ -24,7 +24,7 @@ namespace JointSolver.core
 			DrawSetTransform(Vector2.Zero, 0, Vector2.One);  // TODO: Doesn't work
 			DrawLine(JointA.GetGlobalPos(), JointB.GetGlobalPos(),
 				DisplayStress != null ? DisplayStress.Value < 0 ? Colors.Black : Colors.White : Colors.Magenta,
-				Mathf.Abs(DisplayStress / 20f ?? 5));
+				Mathf.Abs(DisplayStress ?? 5));
 		}
 	}
 }

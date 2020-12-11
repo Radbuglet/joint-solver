@@ -38,9 +38,9 @@ namespace JointSolver.core
 			DrawLine(tailRel, tailRel - AppliedForce.Normalized().Rotated(Mathf.Deg2Rad( openingAngle)) * pointLen, arrowColor, weight);
 		}
 
-		public float AngleToJoint(BridgeJoint joint)
+		public Vector2 DirectionToJoint(BridgeJoint joint)
 		{
-			return this.GetGlobalPos().AngleTo(joint.GetGlobalPos());
+			return this.GetGlobalPos().DirectionTo(joint.GetGlobalPos());
 		}
 	}
 }
