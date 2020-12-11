@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\radbu\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\radbu\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_JointSolver.2140698265.00" t="ExcludeRecursive" />
+    <e p="C:\Users\radbu\AppData\Roaming\JetBrains\Rider2020.2\scratches" t="IncludeRecursive" />
+    <e p="C:\Users\radbu\Documents\School\Year 2 Semester 1\JointSolver" t="IncludeRecursive">
+      <e p=".mono" t="Include">
+        <e p="temp" t="Include">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="JointSolver.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="core" t="Include">
+        <e p="AlgebraSolver.cs" t="Include" />
+        <e p="BridgeJoint.cs" t="Include" />
+        <e p="BridgeMember.cs" t="Include" />
+        <e p="BridgeSolver.cs" t="Include" />
+        <e p="Utils.cs" t="Include" />
+      </e>
+      <e p="JointSolver.csproj" t="IncludeRecursive" />
+      <e p="JointSolver.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
