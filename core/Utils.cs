@@ -26,6 +26,11 @@ namespace JointSolver.core
 				}
 			}
 		}
+		
+		public static void SetGlobalPos(this Node2D node, Vector2 pos)
+		{
+			node.GlobalTransform = Transform2D.Identity.Translated(pos);
+		}
 
 		public static Vector2 GetGlobalPos(this Node2D node)
 		{

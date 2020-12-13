@@ -16,6 +16,11 @@ namespace JointSolver.core
 
 		public override void _Process(float delta)
 		{
+			if (JointA != null && JointB != null)
+			{
+				this.SetGlobalPos((JointA.GetGlobalPos() + JointB.GetGlobalPos()) / 2f);
+			}
+
 			Update();
 		}
 
