@@ -28,7 +28,7 @@ namespace JointSolver.core
 
 			// Draw applied force arrow
 			var arrowColor = Colors.Blue;
-			var tailRel = AppliedForce * 10;
+			var tailRel = AppliedForce.Normalized() * Mathf.Sqrt(AppliedForce.Length() * 20);
 			const float openingAngle = 30;
 			const float pointLen = 10;
 			const float weight = 2;

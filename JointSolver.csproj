@@ -5,6 +5,7 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="designs\TestDesign.tscn" />
+    <Content Include="designs\Truss1.tscn" />
     <Content Include="LICENSE" />
     <Content Include="README.md" />
   </ItemGroup>

@@ -7,6 +7,8 @@ namespace JointSolver.core
 	{
 		[Export] public NodePath JointAPath;
 		[Export] public NodePath JointBPath;
+		[Export] public float MaxTension = 20;
+		[Export] public float MaxCompression = 20;
 
 		public float? DisplayStress;
 		public BridgeJoint JointA => JointAPath != null ? GetNodeOrNull<BridgeJoint>(JointAPath) : null;
@@ -23,7 +25,19 @@ namespace JointSolver.core
 			
 			DrawSetTransformMatrix(GetGlobalTransform().AffineInverse());
 			DrawLine(JointA.GetGlobalPos(), JointB.GetGlobalPos(),
-				DisplayStress != null ? DisplayStress.Value < 0 ? Colors.Black : Colors.White : Colors.Magenta, 5);
+				DisplayStress != null ? GetColor(DisplayStress.Value) : Colors.Magenta, 5);
+
+			if (DisplayStress != null && DisplayStress > MaxTension || DisplayStress < -MaxCompression)
+			{
+				DrawLine(JointA.GetGlobalPos(), JointB.GetGlobalPos(), Colors.Black, 3);
+			}
+		}
+		
+		private Color GetColor(float stress)
+		{
+			return stress > 0
+				? Colors.White.LinearInterpolate(Colors.Red, Mathf.Min(1, stress / MaxTension))
+				: Colors.White.LinearInterpolate(Colors.Purple, Mathf.Min(1, -stress / MaxCompression));
 		}
 	}
 }
