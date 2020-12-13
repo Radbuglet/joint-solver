@@ -13,6 +13,12 @@ namespace JointSolver.core
 		public float? DisplayStress;
 		public BridgeJoint JointA => JointAPath != null ? GetNodeOrNull<BridgeJoint>(JointAPath) : null;
 		public BridgeJoint JointB => JointBPath != null ? GetNodeOrNull<BridgeJoint>(JointBPath) : null;
+		private DynamicFont _debugFont;
+
+		public override void _EnterTree()
+		{
+			_debugFont = GD.Load<DynamicFont>("res://core/debug_font.tres");
+		}
 
 		public override void _Process(float delta)
 		{
@@ -35,6 +41,11 @@ namespace JointSolver.core
 			if (DisplayStress != null && DisplayStress > MaxTension || DisplayStress < -MaxCompression)
 			{
 				DrawLine(JointA.GetGlobalPos(), JointB.GetGlobalPos(), Colors.Black, 3);
+			}
+
+			if (DisplayStress != null)
+			{
+				DrawString(_debugFont, (JointA.GetGlobalPos() + JointB.GetGlobalPos()) / 2, DisplayStress.Value.ToString("F1"));
 			}
 		}
 		

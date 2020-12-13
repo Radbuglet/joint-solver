@@ -52,12 +52,13 @@ JointBPath = NodePath("../Joint4")
 [node name="Joint1" type="Node2D" parent="."]
 position = Vector2( 64, 320 )
 script = ExtResource( 1 )
-LockY = true
 LockX = true
+LockY = true
 
 [node name="Joint3" type="Node2D" parent="."]
 position = Vector2( 192, 320 )
 script = ExtResource( 1 )
+AppliedForce = Vector2( 0, 20 )
 
 [node name="Joint4" type="Node2D" parent="."]
 position = Vector2( 128, 208 )
