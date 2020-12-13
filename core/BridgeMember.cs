@@ -21,10 +21,9 @@ namespace JointSolver.core
 		{
 			if (JointA == null || JointB == null) return;
 			
-			DrawSetTransform(Vector2.Zero, 0, Vector2.One);  // TODO: Doesn't work
+			DrawSetTransformMatrix(GetGlobalTransform().AffineInverse());
 			DrawLine(JointA.GetGlobalPos(), JointB.GetGlobalPos(),
-				DisplayStress != null ? DisplayStress.Value < 0 ? Colors.Black : Colors.White : Colors.Magenta,
-				Mathf.Abs(DisplayStress ?? 5));
+				DisplayStress != null ? DisplayStress.Value < 0 ? Colors.Black : Colors.White : Colors.Magenta, 5);
 		}
 	}
 }

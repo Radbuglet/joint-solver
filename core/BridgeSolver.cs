@@ -36,6 +36,7 @@ namespace JointSolver.core
 				}
 				else if (descendant is BridgeMember member)
 				{
+					member.DisplayStress = null;
 					if (member.JointA == null || member.JointB == null) continue;
 					joints.GetOrInit(member.JointA, () => new List<BridgeMember>()).Add(member);
 					joints.GetOrInit(member.JointB, () => new List<BridgeMember>()).Add(member);

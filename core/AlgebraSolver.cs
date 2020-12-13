@@ -4,6 +4,7 @@ using Godot;
 
 namespace JointSolver.core
 {
+	// TODO: This solver is trash! Replace this once I learn about matrices!
 	public class AlgebraSolver<TMemberId>
 	{
 		public class Equation
@@ -52,7 +53,7 @@ namespace JointSolver.core
 			RemainingEquations.Add(equation);
 		}
 
-		public bool Solve()
+		public void Solve()
 		{
 			while (true)
 			{
@@ -72,26 +73,82 @@ namespace JointSolver.core
 					if (eq.UnsolvedTerms.Count == 0) return true;
 
 					// Try to solve new unknowns
-					if (eq.UnsolvedTerms.Count == 1)
+					if (eq.UnsolvedTerms.Count <= 2)
 					{
-						SolvedValues[eq.UnsolvedTerms[0].Member] = -eq.ConstantTerms.x / eq.UnsolvedTerms[0].Cosine;
-						return true;
-					}
+						var aCos = eq.UnsolvedTerms[0].Cosine;
+						var aSin = eq.UnsolvedTerms[0].Sine;
+						var bCos = eq.UnsolvedTerms.Count == 1 ? 0 : eq.UnsolvedTerms[1].Cosine;
+						var bSin = eq.UnsolvedTerms.Count == 1 ? 0 : eq.UnsolvedTerms[1].Sine;
 
-					if (eq.UnsolvedTerms.Count == 2)
-					{
-						var coefA = eq.UnsolvedTerms[0].Cosine;
-						var coefB = eq.UnsolvedTerms[0].Sine;
-						var coefC = eq.UnsolvedTerms[1].Cosine;
-						var coefD = eq.UnsolvedTerms[1].Sine;
+						// Solve for special case
+						if (aCos != 0 && aSin != 0 && bCos != 0 && bSin != 0)
+						{
+							SolvedValues[eq.UnsolvedTerms[0].Member] = (bSin * eq.ConstantTerms.x - aSin * eq.ConstantTerms.y) 
+							                                           / (aCos * bSin - bCos * aSin);
+						
+							SolvedValues[eq.UnsolvedTerms[1].Member] = (bCos * eq.ConstantTerms.x - aCos * eq.ConstantTerms.y)
+							                                           / (bCos * aSin - aCos * bSin);
 
-						SolvedValues[eq.UnsolvedTerms[0].Member] = (coefD * eq.ConstantTerms.x - coefB * eq.ConstantTerms.y) 
-						                                           / (coefA * coefD - coefC * coefB);
-						
-						SolvedValues[eq.UnsolvedTerms[1].Member] = (coefC * eq.ConstantTerms.x - coefA * eq.ConstantTerms.y)
-						                                           / (coefC * coefB - coefA * coefD);
-						
-						return true;
+							return true;
+						}
+
+						// TODO: Ew, copy-paste. It's been a long time since I had to do something like this.
+						// Try to simple-solve, starting with F_a
+						if (aCos != 0 && bCos == 0)
+						{
+							// Solve F_a (horizontally)
+							var aSln = SolvedValues[eq.UnsolvedTerms[0].Member] = -eq.ConstantTerms.x / aCos;
+
+							// Try to solve F_b (vertically)
+							if (bSin == 0)
+								return true; // We can't solve b, only a.
+
+							SolvedValues[eq.UnsolvedTerms[1].Member] = -(eq.ConstantTerms.y + aSln * aSin) / bSin;
+							return true;
+						}
+
+						if (aSin != 0 && bSin == 0)
+						{
+							// Solve F_a (vertically)
+							var aSln = SolvedValues[eq.UnsolvedTerms[0].Member] = -eq.ConstantTerms.y / aSin;
+
+							// Try to solve F_b (horizontally)
+							if (bCos == 0)
+								return true; // We can't solve b, only a.
+
+							SolvedValues[eq.UnsolvedTerms[1].Member] = -(eq.ConstantTerms.x + aSln * aCos) / bCos;
+							return true;
+						}
+
+						// Try to simple-solve, starting with F_b
+						if (bCos != 0 && aCos == 0)
+						{
+							// Solve F_b (horizontally)
+							var bSln = SolvedValues[eq.UnsolvedTerms[1].Member] = -eq.ConstantTerms.x / bCos;
+
+							// Try to solve F_a (vertically)
+							if (aSin == 0)
+								return true; // We can't solve a, only b.
+
+							SolvedValues[eq.UnsolvedTerms[0].Member] = -(eq.ConstantTerms.y + bSln * bSin) / aSin;
+							return true;
+						}
+
+						if (bSin != 0 && aSin == 0)
+						{
+							// Solve F_b (vertically)
+							var bSln = SolvedValues[eq.UnsolvedTerms[1].Member] = -eq.ConstantTerms.y / bSin;
+
+							// Try to solve F_a (horizontally)
+							if (aCos == 0)
+								return true; // We can't solve a, only b.
+
+							SolvedValues[eq.UnsolvedTerms[0].Member] = -(eq.ConstantTerms.x + bSln * bCos) / aCos;
+							return true;
+						}
+
+						// Give up on solving this for now
+						return false;
 					}
 
 					return false;
@@ -101,8 +158,6 @@ namespace JointSolver.core
 				if (preBatchCount == RemainingEquations.Count || HasSolvedEverything)
 					break;
 			}
-			
-			return HasSolvedEverything;
 		}
 
 		public void ShowDebug()
