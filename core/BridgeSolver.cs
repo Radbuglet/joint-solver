@@ -9,12 +9,17 @@ namespace JointSolver.core
 	{
 		private readonly AlgebraSolver<BridgeMember> _solver = new AlgebraSolver<BridgeMember>();
 
-		public override void _Process(float delta)
+		public override void _Ready()
 		{
-			CalculateStress();
+			CalculateStress(!Engine.EditorHint);
 		}
 
-		private void CalculateStress()
+		public override void _Process(float delta)
+		{
+			CalculateStress(false);
+		}
+
+		private void CalculateStress(bool showDebug)
 		{
 			_solver.Clear();
 			
@@ -64,6 +69,7 @@ namespace JointSolver.core
 			}
 			
 			// Solve and apply
+			if (showDebug) _solver.ShowDebug();
 			_solver.Solve();
 
 			foreach (var pair in _solver.SolvedValues)
