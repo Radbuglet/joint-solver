@@ -49,6 +49,18 @@ MaxCompression = 12.0
 JointAPath = NodePath("../Joint5")
 JointBPath = NodePath("../Joint6")
 
+[node name="Member7" type="Node2D" parent="."]
+position = Vector2( 128, 288 )
+script = ExtResource( 3 )
+JointAPath = NodePath("../Joint1")
+JointBPath = NodePath("../Joint7")
+
+[node name="Member8" type="Node2D" parent="."]
+position = Vector2( 256, 288 )
+script = ExtResource( 3 )
+JointAPath = NodePath("../Joint7")
+JointBPath = NodePath("../Joint5")
+
 [node name="Joint4" type="Node2D" parent="."]
 position = Vector2( 128, 432 )
 script = ExtResource( 1 )
@@ -66,9 +78,14 @@ LockY = true
 [node name="Joint3" type="Node2D" parent="."]
 position = Vector2( 192, 320 )
 script = ExtResource( 1 )
-AppliedForce = Vector2( 0, 27.25 )
+AppliedForce = Vector2( 0, 19.705 )
+
+[node name="Joint7" type="Node2D" parent="."]
+position = Vector2( 192, 256 )
+script = ExtResource( 1 )
 
 [node name="Joint5" type="Node2D" parent="."]
 position = Vector2( 320, 320 )
 script = ExtResource( 1 )
+LockX = true
 LockY = true

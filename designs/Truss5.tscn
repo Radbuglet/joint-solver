@@ -66,9 +66,10 @@ LockY = true
 [node name="Joint3" type="Node2D" parent="."]
 position = Vector2( 192, 320 )
 script = ExtResource( 1 )
-AppliedForce = Vector2( 0, 27.25 )
+AppliedForce = Vector2( 0, 19.705 )
 
 [node name="Joint5" type="Node2D" parent="."]
 position = Vector2( 320, 320 )
 script = ExtResource( 1 )
+LockX = true
 LockY = true

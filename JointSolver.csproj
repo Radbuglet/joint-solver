@@ -4,9 +4,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="designs\TestDesign.tscn" />
-    <Content Include="designs\Truss1.tscn" />
     <Content Include="LICENSE" />
     <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="designs\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="designs\**" />
   </ItemGroup>
 </Project>
